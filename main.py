@@ -40,6 +40,7 @@ for i in df_atraction_permutation:
     map_number = 0
     map_point = 0.0
     store_map = atraction_1
+    sum = 0.0
 
     for j in i:
         map_number += 1
@@ -49,21 +50,17 @@ for i in df_atraction_permutation:
         
         if map_number > 1:
             map_point = math.sqrt((df_map.loc["x", j] - df_map.loc["x", store_map]) ** 2 + (df_map.loc["y", j] - df_map.loc["y", store_map]) ** 2)
-        
-        store_wait += map_point
-        
-        if(store_wait < min_wait):
-            min_wait = store_wait
-            best_atraction = i
-            
+            sum += map_point
         store_map = j
+
+    sum += store_wait
+    if(sum < min_wait):
+        min_wait = sum
+        best_atraction = i
+    
+        
     print(store_wait, end = " ")
     print(map_point)
-
-
-
-
-
 
 current_time = int(hour) + float(minute) / 60.0
 print("現在時刻 " + str(int(current_time)) + ":" + str(int(((current_time - int(current_time)) * 60))))
